@@ -173,9 +173,6 @@ Everything is local. Nothing is sent anywhere except the request itself, to the 
 
 The repository is licensed under **AGPL-3.0** (see `LICENSE`).
 
-Note that the header comment in `worker.js` reads `License: Commercial`, which contradicts the LICENSE
-file. Whichever is correct, the other should be corrected so the terms are unambiguous.
-
 ## Credits
 
 © [KSEC — Erez Kalman](https://www.kalman.co.il)
