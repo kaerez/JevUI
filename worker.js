@@ -1,7 +1,7 @@
-// ============================================
+// =============================================
 // /src/worker.js
-// ============================================
-// Author: Erez Kalman - KSEC License: Commercial
+// =============================================
+// Author: Erez Kalman - KSEC License: AGPL-3.0
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
