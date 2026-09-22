@@ -122,40 +122,46 @@
 
             <div class="flex flex-col gap-4 min-h-0">
                 <section id="stateSection" class="flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm min-h-[15rem] lg:min-h-0 flex-1 overflow-hidden">
-                    <div class="px-3 py-2 border-b border-slate-200 flex flex-col gap-1.5">
-                        <h2 class="text-sm font-bold text-slate-700 flex items-center gap-2 flex-wrap">State
+                    <div class="px-3 py-2 border-b border-slate-200 flex flex-col gap-1.5 shrink-0">
+                        <h2 class="text-sm font-bold text-slate-700 flex items-center gap-1.5 flex-wrap">
+                            <button id="stateCollapse" type="button" aria-expanded="true" title="Collapse this panel"
+                                    class="p-0.5 -ml-0.5 rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100 rotate-90"><svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                            State
                             <span id="stateSummary" class="text-xs font-normal text-slate-400"></span>
                         </h2>
-                        <div class="flex items-center gap-2 flex-wrap">
+                        <div id="stateHeadTools" class="flex items-center gap-2 flex-wrap">
                             <div id="stateModeTabs" class="flex p-0.5 bg-slate-100 rounded-md text-xs font-medium" role="tablist" aria-label="State editor mode"></div>
                             <div id="stateTools" class="flex items-center gap-1 flex-wrap"></div>
                         </div>
                     </div>
-                    <div class="flex-1 min-h-0 overflow-auto custom-scrollbar">
+                    <div id="stateBody" class="flex-1 min-h-[5rem] overflow-auto custom-scrollbar">
                         <div id="stateTree" class="hidden p-3"></div>
                         <textarea id="stateText" class="hidden w-full h-full min-h-[8rem] p-4 font-mono text-sm resize-none focus:outline-none" placeholder="Anything the model should read. Sent as a JSON string."></textarea>
                         <textarea id="stateJson" spellcheck="false" class="hidden w-full h-full min-h-[8rem] p-4 font-mono text-sm resize-none focus:outline-none" placeholder='{ "customer": { "tier": "gold" } }'></textarea>
                     </div>
-                    <p id="stateHint" class="px-3 py-1.5 border-t border-slate-100 text-xs text-slate-500"></p>
+                    <p id="stateHint" class="px-3 py-1.5 border-t border-slate-100 text-xs text-slate-500 shrink-0 line-clamp-1 hover:line-clamp-none"></p>
                 </section>
 
                 <section id="questionsSection" class="flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm min-h-[22rem] lg:min-h-0 flex-[1.4] overflow-hidden">
-                    <div class="px-3 py-2 border-b border-slate-200 flex flex-col gap-1.5">
-                        <h2 class="text-sm font-bold text-slate-700 flex items-center gap-2 flex-wrap">Questions
+                    <div class="px-3 py-2 border-b border-slate-200 flex flex-col gap-1.5 shrink-0">
+                        <h2 class="text-sm font-bold text-slate-700 flex items-center gap-1.5 flex-wrap">
+                            <button id="qCollapse" type="button" aria-expanded="true" title="Collapse this panel"
+                                    class="p-0.5 -ml-0.5 rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100 rotate-90"><svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                            Questions
                             <span id="questionsSummary" class="text-xs font-normal text-slate-400"></span>
                         </h2>
-                        <div class="flex items-center gap-2 flex-wrap">
+                        <div id="qHeadTools" class="flex items-center gap-2 flex-wrap">
                             <div id="qModeTabs" class="flex p-0.5 bg-slate-100 rounded-md text-xs font-medium" role="tablist" aria-label="Questions editor mode"></div>
                             <div id="qTools" class="flex items-center gap-1 flex-wrap"></div>
                         </div>
                     </div>
-                    <div id="qThresholds" class="px-3 py-2 border-b border-slate-100 bg-slate-50/60"></div>
-                    <div class="flex-1 min-h-0 overflow-auto custom-scrollbar">
+                    <div id="qThresholds" class="shrink-0 border-b border-slate-100 bg-slate-50/60 max-h-[45%] overflow-auto custom-scrollbar"></div>
+                    <div id="qBody" class="flex-1 min-h-[5rem] overflow-auto custom-scrollbar">
                         <div id="qTree" class="hidden p-3"></div>
                         <textarea id="questionsText" class="hidden w-full h-full min-h-[10rem] p-4 font-mono text-sm resize-none focus:outline-none" placeholder="Sent as a JSON string, not an object. Useful for testing how the worker rejects bad input."></textarea>
                         <textarea id="questionsJson" spellcheck="false" class="hidden w-full h-full min-h-[10rem] p-4 font-mono text-sm resize-none focus:outline-none"></textarea>
                     </div>
-                    <p id="qHint" class="px-3 py-1.5 border-t border-slate-100 text-xs text-slate-500"></p>
+                    <p id="qHint" class="px-3 py-1.5 border-t border-slate-100 text-xs text-slate-500 shrink-0 line-clamp-1 hover:line-clamp-none"></p>
                 </section>
 
                 <div class="shrink-0">
@@ -713,6 +719,7 @@ const el = {};
  "applyDefaultsBtn", "clearDraftsBtn", "snippetBtn", "libNotice", "toast",
  "stateModeTabs", "stateTools", "stateTree", "stateText", "stateJson", "stateSummary", "stateHint",
  "qModeTabs", "qTools", "qTree", "questionsText", "questionsJson", "questionsSummary", "qHint", "qThresholds",
+ "stateCollapse", "qCollapse", "stateBody", "qBody", "stateHeadTools", "qHeadTools",
  "issueStrip", "executeBtn", "cancelBtn", "repeatCount", "varyUid", "batchBtn", "progressBar",
  "outTabs", "outBody", "outMeta", "copyOutBtn", "loadingIndicator", "outNav",
  "stateSection", "questionsSection", "resultsSection",
@@ -1653,6 +1660,44 @@ function syncDerived() {
 
 const touched = debounce(syncDerived, 220);
 
+/* ------------------------- panel collapsing ----------------------- */
+/* The two editors share one column. Shutting one down to its header gives the
+   other the whole height, which is the quickest way to get room for a long
+   state or a long question set. */
+
+const panels = { state: false, questions: false };
+
+function setPanelCollapsed(which, on) {
+    panels[which] = !!on;
+    const isState = which === "state";
+    const section = isState ? el.stateSection : el.questionsSection;
+    const body = isState ? el.stateBody : el.qBody;
+    const tools = isState ? el.stateHeadTools : el.qHeadTools;
+    const hint = isState ? el.stateHint : el.qHint;
+    const btn = isState ? el.stateCollapse : el.qCollapse;
+    if (!section || !body) return;
+
+    body.classList.toggle("hidden", panels[which]);
+    tools.classList.toggle("hidden", panels[which]);
+    hint.classList.toggle("hidden", panels[which]);
+    if (!isState && el.qThresholds) el.qThresholds.classList.toggle("hidden", panels[which]);
+
+    /* a collapsed panel stops competing for space; the other keeps its grow */
+    section.classList.toggle("flex-none", panels[which]);
+    section.classList.toggle("min-h-[15rem]", !panels[which] && isState);
+    section.classList.toggle("min-h-[22rem]", !panels[which] && !isState);
+    if (isState) section.classList.toggle("flex-1", !panels[which]);
+    else section.classList.toggle("flex-[1.4]", !panels[which]);
+
+    btn.classList.toggle("rotate-90", !panels[which]);
+    btn.setAttribute("aria-expanded", panels[which] ? "false" : "true");
+    btn.title = panels[which] ? "Expand this panel" : "Collapse this panel";
+    saveDraft();
+}
+
+el.stateCollapse.addEventListener("click", function () { setPanelCollapsed("state", !panels.state); });
+el.qCollapse.addEventListener("click", function () { setPanelCollapsed("questions", !panels.questions); });
+
 /* --------------------------- panel jumps -------------------------- */
 
 const PANELS = { state: "stateSection", questions: "questionsSection", results: "resultsSection" };
@@ -1660,6 +1705,7 @@ const PANELS = { state: "stateSection", questions: "questionsSection", results: 
 function jumpTo(which) {
     const node = el[PANELS[which]];
     if (!node) return;
+    if (panels[which]) setPanelCollapsed(which, false);
     node.scrollIntoView({ block: "nearest", behavior: "smooth" });
     node.classList.remove("jump-flash");
     void node.offsetWidth;
@@ -2031,23 +2077,38 @@ function sortBands(set) {
     set.bands.sort(function (a, b) { return b.min - a.min; });
 }
 
+let thresholdsOpen = false;
+
 function renderThresholdStrip() {
     if (!el.qThresholds) return;
     el.qThresholds.textContent = "";
     const tally = thresholdTally();
-    const n = thresholds.bands.length;
-    el.qThresholds.appendChild(h("div", { class: "flex items-center gap-2 flex-wrap text-[11px] mb-1" }, [
-        h("span", { class: "font-semibold text-slate-700", text: "thresholds" }),
-        h("span", { class: "text-slate-500",
-            text: n + (n === 1 ? " band" : " bands") + " and a floor · " + (tally.live.length
-                ? tally.live.length + (tally.live.length === 1 ? " question overrides them" : " questions override them")
-                : "every question uses them") })
-    ]));
-    el.qThresholds.appendChild(bandEditor(thresholds, function () {
+
+    /* Closed, this is one line: the bands as chips. Open, it is the editor.
+       It shares the panel with the question list, so it stays shut by default. */
+    const det = h("details", { class: "px-3 py-1.5" });
+    const sum = h("summary", { class: "cursor-pointer select-none text-[11px] flex items-center gap-1.5 flex-wrap text-slate-600",
+                               title: "Show or hide the threshold editor" }, [
+        h("span", { class: "font-semibold text-slate-700", text: "thresholds" })
+    ]);
+    thresholds.bands.forEach(function (b) { sum.appendChild(bandChip(b.label + " " + fmt(b.min), b.color)); });
+    sum.appendChild(bandChip(thresholds.floor.label, thresholds.floor.color));
+    if (tally.live.length) {
+        sum.appendChild(h("span", { class: "text-slate-500",
+            text: tally.live.length + (tally.live.length === 1 ? " override" : " overrides") }));
+    }
+    det.appendChild(sum);
+    det.open = thresholdsOpen;
+    det.addEventListener("toggle", function () { thresholdsOpen = det.open; saveDraft(); });
+    el.qThresholds.appendChild(det);
+
+    const box = h("div", { class: "pt-1.5" });
+    det.appendChild(box);
+    box.appendChild(bandEditor(thresholds, function () {
         sortBands(thresholds);
         saveDraft(); renderQuestions(); renderThresholdStrip(); renderOut();
     }));
-    el.qThresholds.appendChild(h("p", { class: "text-[11px] text-slate-500 mt-1",
+    box.appendChild(h("p", { class: "text-[11px] text-slate-500 mt-1",
         text: "Never sent: they sort each answer into a band so you can see what your code would do. " +
               "An answer takes the first band it reaches, counting down. " +
               "Noul uses max(p, 1-p); choice and score use the returned confidence. They travel with the question set." }));
@@ -2067,7 +2128,7 @@ function renderThresholdStrip() {
         saveDraft(); renderQuestions(); renderThresholdStrip(); renderOut();
         toast("Back to the built-in bands");
     }, "plain", "Back to act, review and hold"));
-    el.qThresholds.appendChild(own);
+    box.appendChild(own);
 
     if (tally.live.length || tally.orphan.length) {
         const acts = h("div", { class: "flex items-center gap-1.5 flex-wrap mt-1.5" });
@@ -2085,7 +2146,7 @@ function renderThresholdStrip() {
                 toast("Removed bands with no question left to apply to");
             }, "red", "These belong to ids that were renamed or removed: " + tally.orphan.join(", ")));
         }
-        el.qThresholds.appendChild(acts);
+        box.appendChild(acts);
     }
 }
 
@@ -2731,9 +2792,10 @@ function renderRuns() {
         el.outBody.appendChild(h("p", { class: "text-slate-500 text-sm mb-3",
             text: "No runs in this tab yet. The list lives in the tab and is not written to disk; Save keeps one in the library." }));
         const hit = applicableRuns();
+        const pending = pendingRuns(hit.runs);
         const row = h("div", { class: "flex gap-2 flex-wrap" }, [
-            smallBtn(applicableLabel(hit), function () { loadRunRecords(hit.runs); },
-                hit.runs.length ? "indigo" : "plain", applicableTitle(hit))
+            smallBtn(applicableLabel(hit, pending), function () { loadRunRecords(pending); },
+                pending.length ? "indigo" : "plain", applicableTitle(hit))
         ]);
         row.appendChild(smallBtn("Browse all example runs", function () { openLibrary("runs", ""); }, "plain",
             "The published Opus, Sol, TypeSafe and reference answers for every example"));
@@ -2755,9 +2817,12 @@ function renderRuns() {
             onclick: function () { diffA = null; diffB = null; renderOut(); } }, ["Clear A and B"]));
     }
     const hit = applicableRuns();
-    if (hit.runs.length) {
+    const pending = pendingRuns(hit.runs);
+    /* once the example's run is in the list there is nothing left to load, so
+       the button goes rather than sitting there doing nothing */
+    if (pending.length) {
         headActs.appendChild(h("button", { type: "button", class: "text-[11px] text-indigo-700 border border-indigo-200 bg-indigo-50 rounded px-2 py-0.5 hover:bg-indigo-100",
-            title: applicableTitle(hit), onclick: function () { loadRunRecords(hit.runs); } }, [applicableLabel(hit)]));
+            title: applicableTitle(hit), onclick: function () { loadRunRecords(pending); } }, [applicableLabel(hit, pending)]));
     }
     headActs.appendChild(h("button", { type: "button", class: "text-[11px] text-slate-600 border border-slate-300 rounded px-2 py-0.5 hover:bg-slate-50",
         title: "Open the library to load a published run to compare against", onclick: function () { openLibrary("runs", ""); } }, ["Load"]));
@@ -3524,12 +3589,42 @@ function applicableRuns() {
     return out;
 }
 
+/** Everything a saved run represents: the payload into the editors, and the
+ *  answers into the runs list, without the jump the editors alone would do. */
+function loadRunEverything(rec) {
+    const payload = runRecordPayload(rec);
+    if (!payload) { toast("The question set this run refers to is not in the library"); return; }
+    if (payload.state !== undefined) {
+        if (typeof payload.state === "string") { st.text = payload.state; st.mode = "text"; }
+        else { st.root = valueToField("", payload.state); st.mode = "builder"; }
+        paintStateMode();
+    }
+    if (payload.questions && typeof payload.questions === "object" && !Array.isArray(payload.questions)) {
+        loadQuestionsValue(payload.questions);
+        qs.text = JSON.stringify(payload.questions, null, 2);
+        qs.mode = "builder";
+        paintQuestionsMode();
+    }
+    syncDerived();
+    loadRunRecord(rec);          /* closes the library and shows the answers */
+    toast("Loaded " + rec.name + " with its state and questions");
+}
+
+/** Saved runs that are not already sitting in this tab's runs list. */
+function pendingRuns(list) {
+    return (list || []).filter(function (r) {
+        return !groups.some(function (g) { return g.kind === "saved" && g.label === r.name; });
+    });
+}
+
 /** One line describing what "load applicable" would pull in. */
-function applicableLabel(hit) {
-    if (!hit.runs.length) return "No saved runs match what is loaded";
-    const n = hit.runs.length;
+function applicableLabel(hit, list) {
+    const runs = list || hit.runs;
+    if (!runs.length) return "No saved runs match what is loaded";
+    /* an example ships exactly one run, so a count there would only ever say 1 */
+    if (hit.how === "pair") return "Load the run for this example";
+    const n = runs.length;
     const noun = n === 1 ? " run" : " runs";
-    if (hit.how === "pair") return "Load " + n + noun + " for this example";
     if (hit.how === "state") return "Load " + n + noun + " for this state";
     return "Load " + n + noun + " for this question set";
 }
@@ -3865,8 +3960,11 @@ function renderLibrary() {
     } else if (store === "runs") {
         el.libToolbar.appendChild(smallBtn("Add the current run", function () { saveRunRecord(null, null); }, "indigo"));
         const hit = applicableRuns();
-        el.libToolbar.appendChild(smallBtn(applicableLabel(hit), function () { loadRunRecords(hit.runs); },
-            hit.runs.length ? "indigo" : "plain", applicableTitle(hit)));
+        const pending = pendingRuns(hit.runs);
+        if (pending.length) {
+            el.libToolbar.appendChild(smallBtn(applicableLabel(hit, pending), function () { loadRunRecords(pending); },
+                "indigo", applicableTitle(hit)));
+        }
         if (hit.how === "pair") {
             el.libToolbar.appendChild(smallBtn("Filter to this example", function () {
                 libFilter = hit.state.name; renderLibrary();
@@ -3940,7 +4038,7 @@ function renderLibrary() {
     if (store === "runs") {
         el.libBody.appendChild(h("p", { class: "mb-3 text-xs text-slate-500",
             text: "Load a run to read its answers, then mark it A and one of your own B in the Runs view to compare them. " +
-                  "Use both, State or Questions replaces the editors from the payload that produced the run." }));
+                  "Load all does both at once. State and Questions, State or Questions replaces the editors from the payload that produced the run." }));
     }
     if (!rows.length) {
         el.libBody.appendChild(h("p", { class: "text-sm text-slate-500",
@@ -4038,9 +4136,13 @@ function libRow(store, rec) {
                 "Overwrite this entry with the thresholds in the editor"));
         }
     } else if (store === "runs") {
+        /* the whole example in one click: the payload that produced the run,
+           and the run itself to read its answers against */
+        acts.appendChild(smallBtn("Load all", function () { loadRunEverything(rec); }, "violet",
+            "Replace State and Questions from this run and load its answers"));
         acts.appendChild(smallBtn("Load", function () { loadRunRecord(rec); }, "plain",
             "Show this run's answers in the Answers view"));
-        acts.appendChild(smallBtn("Use both", function () {
+        acts.appendChild(smallBtn("State and Questions", function () {
             usePayload(runRecordPayload(rec), rec.name, "both");
         }, "indigo", "Replace State and Questions from this run"));
         acts.appendChild(smallBtn("State", function () {
@@ -4364,6 +4466,7 @@ function saveDraft() {
             questionsText: qs.mode === "builder" ? qs.text : (qs.mode === "text" ? el.questionsText.value : el.questionsJson.value),
             questions: qs.mode === "builder" ? questionsToValue(qs.list) : null,
             thresholds: qs.thresholds, globalThresholds: globalBandSnapshot(),
+            thresholdsOpen: thresholdsOpen, panels: { state: panels.state, questions: panels.questions },
             varyUid: el.varyUid.checked
         }));
     } catch (e) { /* storage disabled: the draft is a convenience only */ }
@@ -4382,6 +4485,11 @@ function loadDraft() {
     if (d.questionsMode) qs.mode = d.questionsMode;
     if (d.thresholds && typeof d.thresholds === "object") qs.thresholds = normaliseBandMap(d.thresholds);
     applyGlobalBands(d.globalThresholds);
+    if (typeof d.thresholdsOpen === "boolean") thresholdsOpen = d.thresholdsOpen;
+    if (d.panels) {
+        setPanelCollapsed("state", !!d.panels.state);
+        setPanelCollapsed("questions", !!d.panels.questions);
+    }
     if (typeof d.varyUid === "boolean") el.varyUid.checked = d.varyUid;
     return true;
 }
